@@ -67,6 +67,22 @@
             document.getElementById('id_uf').disabled = true;
             document.getElementById('id_numero').disabled = true;
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('formSalvar');
+            form.addEventListener('submit', function (event) {
+                const numero = document.getElementById('id_numero').value.trim();
+                if (!form.checkValidity() || !numero) {
+                    if (!form.checkValidity()) {
+                        alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+                    }
+                    if (!numero) {
+                        alert('O campo "Número" é obrigatório.');
+                    }
+                    event.preventDefault(); // Impede o envio do formulário
+                }
+            });
+        });
     </script>
 </head>
 <body>
@@ -111,7 +127,6 @@
                         <td>{{ form.numero.label_tag }}</td>
                         <td>{{ form.numero }}</td>
                     </tr>
-                    <tr>
                     <!-- Adicione mais campos conforme necessário -->
                 </tbody>
             </table>
