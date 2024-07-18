@@ -10,7 +10,7 @@ class AppBancoForm(forms.ModelForm):
         fields = ['nome', 'celular', 'cep', 'endereco', 'complemento', 'bairro', 'localidade', 'uf', 'numero']
         widgets = {
             'cep': forms.TextInput(attrs={'id': 'id_cep'}),
-            'endereco': forms.TextInput(attrs={'id': 'id_endereco', 'disabled': 'disabled'}),
+            'logradouro': forms.TextInput(attrs={'id': 'id_endereco', 'disabled': 'disabled'}),
             'complemento': forms.TextInput(attrs={'id': 'id_complemento', 'disabled': 'disabled'}),
             'bairro': forms.TextInput(attrs={'id': 'id_bairro', 'disabled': 'disabled'}),
             'localidade': forms.TextInput(attrs={'id': 'id_localidade', 'disabled': 'disabled'}),
