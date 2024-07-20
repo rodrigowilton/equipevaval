@@ -17,6 +17,11 @@
         .form-check-label {
             font-weight: bold;
         }
+        /* Define a borda da caixa de seleção */
+        .form-check-input {
+            border: 2px solid #000; /* Altere a cor conforme desejado */
+            border-radius: 4px; /* Adiciona bordas arredondadas (opcional) */
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -80,11 +85,12 @@
                     </tr>
                     <!-- Adicione mais campos conforme necessário -->
                     <tr>
-                        <td class="form-check">
-                            <input type="checkbox" name="concorda_whatsapp" id="concorda_whatsapp" class="form-check-input">
-                            <label for="concorda_whatsapp" class="form-check-label">Você concorda em receber mensagens no seu WhatsApp?</label>
+                        <td colspan="2">
+                            <div class="form-check">
+                                <input type="checkbox" name="concorda_whatsapp" id="concorda_whatsapp" class="form-check-input">
+                                <label for="concorda_whatsapp" class="form-check-label">Você concorda em receber mensagens no seu WhatsApp?</label>
+                            </div>
                         </td>
-                        <td></td>
                     </tr>
                 </tbody>
             </table>
