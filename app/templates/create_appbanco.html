@@ -13,6 +13,10 @@
         input[type="text"], input[type="tel"], input[type="number"], textarea {
             text-transform: uppercase;
         }
+        /* Define estilo para as perguntas */
+        .form-check-label {
+            font-weight: bold;
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -76,8 +80,11 @@
                     </tr>
                     <!-- Adicione mais campos conforme necessário -->
                     <tr>
-                        <td>Você concorda em receber mensagens no seu WhatsApp?</td>
-                        <td>{{ form.concorda_whatsapp }}</td>
+                        <td class="form-check">
+                            <input type="checkbox" name="concorda_whatsapp" id="concorda_whatsapp" class="form-check-input">
+                            <label for="concorda_whatsapp" class="form-check-label">Você concorda em receber mensagens no seu WhatsApp?</label>
+                        </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
