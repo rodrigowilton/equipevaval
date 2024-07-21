@@ -1,5 +1,18 @@
 from django.shortcuts import render, redirect
 from .forms import AppBancoForm
+from .models import AppBanco
+
+
+def relatorio_dados(request):
+    # Recuperar todos os objetos do modelo AppBanco
+    dados = AppBanco.objects.all()
+    
+    # Enviar os dados para o template HTML
+    context = {
+        'dados': dados
+    }
+    
+    return render(request, 'relatorio_dados.html', context)
 
 def index(request):
     return render(request, "index.html")
