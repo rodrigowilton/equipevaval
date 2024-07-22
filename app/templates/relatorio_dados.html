@@ -1,5 +1,3 @@
-<!-- relatorio_dados.html -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -65,34 +63,35 @@
         </tbody>
     </table>
 
-    <button onclick="exportarCSV()">Exportar CSV</button>
+    <button onclick="exportarXLSX()">Exportar XLSX</button>
+
+    <!-- Adicione a biblioteca SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
     <script>
-        function exportarCSV() {
-            // Capturar os dados da tabela e gerar o conteúdo CSV
+        function exportarXLSX() {
+            // Capturar os dados da tabela
             const table = document.querySelector('table');
             const rows = table.querySelectorAll('tr');
-            let csvContent = "data:text/csv;charset=utf-8,";
+            let data = [];
 
-            rows.forEach(function(row) {
+            // Extrair os dados da tabela
+            rows.forEach((row) => {
                 const cols = row.querySelectorAll('td, th');
-                cols.forEach(function(col, index) {
-                    csvContent += col.textContent;
-                    if (index < cols.length - 1) {
-                        csvContent += ',';
-                    } else {
-                        csvContent += '\n';
-                    }
+                let rowData = [];
+                cols.forEach((col) => {
+                    rowData.push(col.textContent);
                 });
+                data.push(rowData);
             });
 
-            // Criar um link para download do arquivo CSV
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "relatorio_dados.csv");
-            document.body.appendChild(link);
-            link.click();
+            // Criar um workbook com SheetJS
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Relatório de Dados");
+
+            // Gerar o arquivo XLSX
+            XLSX.writeFile(wb, 'relatorio_dados.xlsx');
         }
     </script>
 </body>
