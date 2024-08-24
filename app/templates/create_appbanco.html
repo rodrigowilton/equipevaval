@@ -24,19 +24,76 @@
         }
     </style>
     <script>
+        function buscarCEP() {
+            const cep = document.getElementById('id_cep').value.replace(/\D/g, '');
+
+            if (cep.length !== 8) {
+                alert('O CEP deve conter 8 dígitos.');
+                return;
+            }
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        alert('CEP não encontrado.');
+                        document.getElementById('id_endereco').value = '';
+                        document.getElementById('id_bairro').value = '';
+                        document.getElementById('id_localidade').value = '';
+                        document.getElementById('id_uf').value = '';
+                        document.getElementById('id_endereco').disabled = true;
+                        document.getElementById('id_bairro').disabled = true;
+                        document.getElementById('id_localidade').disabled = true;
+                        document.getElementById('id_uf').disabled = true;
+                        document.getElementById('id_numero').disabled = true;
+                    } else {
+                        document.getElementById('id_endereco').value = data.logradouro;
+                        document.getElementById('id_bairro').value = data.bairro;
+                        document.getElementById('id_localidade').value = data.localidade;
+                        document.getElementById('id_uf').value = data.uf;
+                        document.getElementById('id_endereco').disabled = false;
+                        document.getElementById('id_bairro').disabled = false;
+                        document.getElementById('id_localidade').disabled = false;
+                        document.getElementById('id_uf').disabled = false;
+                        document.getElementById('id_numero').disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar o CEP:', error);
+                    alert('Erro ao buscar o CEP.');
+                    document.getElementById('id_endereco').value = '';
+                    document.getElementById('id_bairro').value = '';
+                    document.getElementById('id_localidade').value = '';
+                    document.getElementById('id_uf').value = '';
+                    document.getElementById('id_endereco').disabled = true;
+                    document.getElementById('id_bairro').disabled = true;
+                    document.getElementById('id_localidade').disabled = true;
+                    document.getElementById('id_uf').disabled = true;
+                    document.getElementById('id_numero').disabled = true;
+                });
+        }
+
         $(document).ready(function(){
             $('#id_celular').mask('(00) 00000-0000');
             $('#id_cep').mask('00000-000');
-
-            // Garantir que o campo bairro esteja habilitado
-            document.getElementById('id_bairro').disabled = false;
+            document.getElementById('id_endereco').disabled = true;
+            document.getElementById('id_bairro').disabled = true;
+            document.getElementById('id_localidade').disabled = true;
+            document.getElementById('id_uf').disabled = true;
+            document.getElementById('id_numero').disabled = true;
         });
 
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('formSalvar');
             form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+                const numero = document.getElementById('id_numero').value.trim();
+                if (!form.checkValidity() || !numero) {
+                    if (!form.checkValidity()) {
+                        alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+                    }
+                    if (!numero) {
+                        alert('O campo "Número" é obrigatório.');
+                    }
                     event.preventDefault(); // Impede o envio do formulário
                 }
             });
@@ -59,17 +116,21 @@
                         <td>{{ form.celular.label_tag }}</td>
                         <td>{{ form.celular }}</td>
                     </tr>
-                    <tr>
-                        <td>{{ form.bairro.label_tag }}</td>
-                        <td>{{ form.bairro }}</td>
-                    </tr>
+
                     <tr>
                         <td>{{ form.cep.label_tag }}</td>
                         <td>{{ form.cep }}</td>
                     </tr>
                     <tr>
+                        <td><button type="button" class="btn btn-primary" onclick="buscarCEP()">Buscar CEP</button></td>
+                    </tr>
+                    <tr>
                         <td>{{ form.endereco.label_tag }}</td>
                         <td>{{ form.endereco }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.bairro.label_tag }}</td>
+                        <td>{{ form.bairro }}</td>
                     </tr>
                     <tr>
                         <td>{{ form.localidade.label_tag }}</td>
@@ -82,6 +143,10 @@
                     <tr>
                         <td>{{ form.numero.label_tag }}</td>
                         <td>{{ form.numero }}</td>
+                    </tr>
+					<tr>
+                        <td>{{ form.lideranca.label_tag }}</td>
+                        <td>{{ form.lideranca }}</td>
                     </tr>
                     <!-- Adicione mais campos conforme necessário -->
                     <tr>

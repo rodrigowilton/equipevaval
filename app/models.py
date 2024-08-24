@@ -12,3 +12,4 @@ class AppBanco(models.Model):
     numero = models.CharField(max_length=10, null=True, blank=True)
     datacadastro = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     concorda_whatsapp = models.BooleanField(default=False)  # Novo campo adicionado
+    lideranca = models.CharField(max_length=50, null=False, blank=False)

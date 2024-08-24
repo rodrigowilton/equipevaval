@@ -4,7 +4,8 @@ from .models import AppBanco
 class AppBancoForm(forms.ModelForm):
     class Meta:
         model = AppBanco
-        fields = ['nome', 'celular', 'bairro', 'concorda_whatsapp']
+        fields = ['nome', 'celular', 'cep','bairro','endereco', 'complemento','localidade',
+                  'uf','numero','concorda_whatsapp','lideranca']
         widgets = {
             'cep': forms.TextInput(attrs={'id': 'id_cep'}),
             'endereco': forms.TextInput(attrs={'id': 'id_endereco'}),
@@ -13,5 +14,7 @@ class AppBancoForm(forms.ModelForm):
             'localidade': forms.TextInput(attrs={'id': 'id_localidade'}),
             'uf': forms.TextInput(attrs={'id': 'id_uf'}),
             'numero': forms.TextInput(attrs={'id': 'id_numero'}),
-            'concorda_whatsapp': forms.CheckboxInput(attrs={'id': 'id_concorda_whatsapp'})
+            'concorda_whatsapp': forms.CheckboxInput(attrs={'id': 'id_concorda_whatsapp'}),
+            'lideranca': forms.TextInput(attrs={'id': 'id_lideranca'}),
+            
         }
