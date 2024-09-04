@@ -13,4 +13,4 @@ class AppBanco(models.Model):
     datacadastro = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     concorda_whatsapp = models.BooleanField(default=False)  # Novo campo adicionado
     lideranca = models.CharField(max_length=50, null=False, blank=False)
-    datanascimento = models.DateField(null=True, blank=True)  # Novo campo adicionado
+    data_nascimento = models.DateField(null=True, blank=True)  # Novo campo adicionado
