@@ -76,6 +76,7 @@
         $(document).ready(function(){
             $('#id_celular').mask('(00) 00000-0000');
             $('#id_cep').mask('00000-000');
+            $('#id_datanascimento').mask('00/00/0000');
             document.getElementById('id_endereco').disabled = true;
             document.getElementById('id_bairro').disabled = true;
             document.getElementById('id_localidade').disabled = true;
@@ -144,6 +145,10 @@
                         <td>{{ form.numero.label_tag }}</td>
                         <td>{{ form.numero }}</td>
                     </tr>
+					<tr>
+						<td>{{ form.datanascimento.label_tag }}</td>
+						<td><input type="text" id="id_datanascimento" name="datanascimento" class="form-control" placeholder="DD/MM/AAAA"></td>
+					</tr>
 					<tr>
                         <td>{{ form.lideranca.label_tag }}</td>
                         <td>{{ form.lideranca }}</td>
