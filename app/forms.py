@@ -5,7 +5,7 @@ class AppBancoForm(forms.ModelForm):
     class Meta:
         model = AppBanco
         fields = ['nome', 'celular', 'cep','bairro','endereco', 'complemento','localidade',
-                  'uf','numero','concorda_whatsapp','lideranca']
+                  'uf','numero','datanascimento','concorda_whatsapp','lideranca']
         widgets = {
             'cep': forms.TextInput(attrs={'id': 'id_cep'}),
             'endereco': forms.TextInput(attrs={'id': 'id_endereco'}),
